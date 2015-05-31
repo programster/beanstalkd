@@ -12,4 +12,10 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 VOLUME ["/data"]
 EXPOSE 11300
+
+# Run beanstalk:
+#  * on port 11300 (default)
+#  * fsync calling at most once every minute (60000 ms).
+#  * binlog kept in /data
+# http://man.cx/beanstalkd%281%29
 CMD ["/usr/bin/beanstalkd", "-f", "60000", "-b", "/data"]
